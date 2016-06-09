@@ -1,0 +1,55 @@
+---
+# tasks file for docker-engine
+
+- name: Check ubuntu version is supported
+  fail:
+    msg: 'Ubuntu {{ ansible_lsb.codename }} not supported'
+  when: ansible_lsb.codename not in docker_engine_supported
+  tags:
+    - docker_engine
+
+- name: Set docker_engine_uname
+  set_fact:
+    docker_engine_uname: '{{ lookup("pipe", "uname -r") }}'
+  tags:
+    - docker_engine
+
+- name: Install required packages
+  apt:
+    name: '{{ item }}'
+    state: 'installed'
+  with_items:
+    - apt-transport-https
+    - ca-certificates
+    - linux-image-extra-{{ docker_engine_uname }}
+  tags:
+    - docker_engine
+
+- name: Add docker apt key
+  apt_key:
+    keyserver: 'hkp://p80.pool.sks-keyservers.net:80'
+    id: '58118E89F3A912897C070ADBF76221572C52609D'
+  tags:
+    - docker_engine
+
+- name: Add docker repo
+  apt_repository:
+    filename: 'docker'
+    repo: 'deb https://apt.dockerproject.org/repo ubuntu-{{ ansible_lsb.codename }} main'
+  tags:
+    - docker_engine
+
+- name: Install docker-engine
+  apt:
+    name: 'docker-engine'
+    state: 'installed'
+  tags:
+    - docker_engine
+
+- name: Ensure docker is started and enabled at boot
+  service:
+    name: 'docker'
+    state: 'started'
+    enabled: 'yes'
+  tags:
+    - docker_engine

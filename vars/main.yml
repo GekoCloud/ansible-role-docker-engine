@@ -1,0 +1,7 @@
+---
+# vars file for docker-engine
+
+docker_engine_supported:
+  - trusty
+  - wily
+  - xenial
