@@ -21,6 +21,3 @@ export http_proxy="{{ docker_engine_http_proxy }}"
 {% if docker_engine_tmpdir is defined %}
 export TMPDIR="{{ docker_engine_tmpdir }}"
 {% endif %}
-~
-~
-~
