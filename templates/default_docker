@@ -1,0 +1,26 @@
+# Docker Upstart and SysVinit configuration file
+
+#
+# THIS FILE DOES NOT APPLY TO SYSTEMD
+#
+#   Please see the documentation for "systemd drop-ins":
+#   https://docs.docker.com/engine/articles/systemd/
+#
+
+# Use DOCKER_OPTS to modify the daemon startup options.
+{% if docker_engine_opts is defined %}
+DOCKER_OPTS="{{ docker_engine_opts }}"
+{% endif %}
+
+# If you need Docker to use an HTTP proxy, it can also be specified here.
+{% if docker_engine_http_proxy is defined %}
+export http_proxy="{{ docker_engine_http_proxy }}"
+{% endif %}
+
+# This is also a handy place to tweak where Docker's temporary files go.
+{% if docker_engine_tmpdir is defined %}
+export TMPDIR="{{ docker_engine_tmpdir }}"
+{% endif %}
+~
+~
+~

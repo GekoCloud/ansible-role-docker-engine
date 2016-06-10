@@ -47,6 +47,15 @@
   tags:
     - docker_engine
 
+- name: Set docker defaults
+  template:
+    src: 'default_docker'
+    dest: '/etc/default/docker'
+    mode: '0644'
+  notify: Restart docker
+  tags:
+    - docker_engine
+
 - name: Ensure docker is started and enabled at boot
   service:
     name: 'docker'
