@@ -30,3 +30,4 @@ License
 
 MIT
 
+[![Build Status](https://travis-ci.org/dpujadas/ansible-role-docker-engine.svg?branch=master)](https://travis-ci.org/dpujadas/ansible-role-docker-engine)
