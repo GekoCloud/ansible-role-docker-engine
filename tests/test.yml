@@ -1,5 +1,6 @@
 ---
-- hosts: localhost
+- hosts: travis
+  connection: docker
   remote_user: root
   roles:
-    - docker-engine
+    - ansible-role-docker-engine
