@@ -8,12 +8,6 @@
   tags:
     - docker_engine
 
-- name: Set docker_engine_uname
-  set_fact:
-    docker_engine_uname: '{{ lookup("pipe", "uname -r") }}'
-  tags:
-    - docker_engine
-
 - name: Install required packages
   apt:
     name: '{{ item }}'
@@ -22,7 +16,7 @@
   with_items:
     - apt-transport-https
     - ca-certificates
-    - linux-image-extra-{{ docker_engine_uname }}
+    - linux-image-extra-{{ ansible_kernel }}
   tags:
     - docker_engine
 
