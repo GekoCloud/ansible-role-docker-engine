@@ -8,11 +8,19 @@
   tags:
     - docker_engine
 
+- name: Update apt cache
+  apt:
+    update_cache: 'yes'
+    cache_valid_time: '3600'
+  register: apt_update_cache
+  changed_when: apt_update_cache.cache_updated
+  tags:
+    - docker_engine
+
 - name: Install required packages
   apt:
     name: '{{ item }}'
     state: 'installed'
-    update_cache: 'yes'
   with_items:
     - apt-transport-https
     - ca-certificates
