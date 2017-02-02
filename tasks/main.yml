@@ -24,7 +24,7 @@
   with_items:
     - apt-transport-https
     - ca-certificates
-    - linux-image-extra-{{ ansible_kernel }}
+#    - linux-image-extra-{{ ansible_kernel }}
   tags:
     - docker_engine
 
@@ -42,26 +42,30 @@
   tags:
     - docker_engine
 
+- name: Prevent docker to start on install
+  copy:
+    content: |-
+      #!/bin/sh
+      exit 101
+    dest: '/usr/sbin/policy-rc.d'
+    owner: 'root'
+    group: 'root'
+    mode: '0755'
+  changed_when: False
+
 - name: Install docker-engine
   apt:
-    name: 'docker-engine'
+    name: '{{ docker_engine_package_name }}'
     state: 'installed'
   tags:
     - docker_engine
 
-- name: Set docker defaults
-  template:
-    src: 'default_docker'
-    dest: '/etc/default/docker'
-    mode: '0644'
-  notify: Restart docker
-  tags:
-    - docker_engine
+- name: Remove policy-rc.d
+  file:
+    name: '/usr/sbin/policy-rc.d'
+    state: 'absent'
+  changed_when: False
 
-- name: Ensure docker is started and enabled at boot
-  service:
-    name: 'docker'
-    state: 'started'
-    enabled: 'yes'
+- include: '{{ docker_engine_init_system }}.yml'
   tags:
     - docker_engine

@@ -1,0 +1,15 @@
+- name: Set docker opts
+  lineinfile:
+    name: '/lib/systemd/system/docker.service'
+    regexp: '^ExecStart='
+    line: 'ExecStart=/usr/bin/dockerd -H fd:// {{ docker_engine_opts }}'
+  when: docker_engine_opts is defined
+  notify: reload systemctl docker
+
+# TODO: Create environmentfile (for docker_engine_http_proxy and docker_engine_tmpdir)
+
+- name: Ensure docker is started and enabled at boot
+  service:
+    name: 'docker'
+    state: 'started'
+    enabled: 'yes'

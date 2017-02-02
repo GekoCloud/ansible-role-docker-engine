@@ -1,7 +1,12 @@
 ---
 # handlers file for docker-engine
 
-- name: Restart docker
+- name: restart docker
   service:
     name: 'docker'
     state: 'restarted'
+
+- name: reload systemctl docker
+  shell: >
+    systemctl daemon-reload
+  notify: restart docker
