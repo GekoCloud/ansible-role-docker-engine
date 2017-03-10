@@ -5,6 +5,7 @@
   roles:
     - {
       role: ansible-role-docker-engine,
+      docker_engine_is_prod: False,
       docker_engine_opts: '-H tcp://0.0.0.0:2375'
     }
 
@@ -15,5 +16,6 @@
     - {
       role: ansible-role-docker-engine,
       docker_engine_init_system: 'systemd',
+      docker_engine_is_prod: False,
       docker_engine_opts: '-H tcp://0.0.0.0:2375'
     }
