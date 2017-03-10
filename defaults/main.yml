@@ -3,3 +3,4 @@
 
 docker_engine_init_system: 'upstart'
 docker_engine_is_prod: True
+docker_engine_state: 'started'

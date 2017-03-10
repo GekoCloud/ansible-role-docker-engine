@@ -8,8 +8,8 @@
 
 # TODO: Create environmentfile (for docker_engine_http_proxy and docker_engine_tmpdir)
 
-- name: Ensure docker is started and enabled at boot
+- name: Ensure docker is {{ docker_engine_state }} and enabled at boot
   service:
     name: 'docker'
-    state: 'started'
+    state: '{{ docker_engine_state }}'
     enabled: 'yes'
