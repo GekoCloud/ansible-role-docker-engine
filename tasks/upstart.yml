@@ -9,4 +9,4 @@
   service:
     name: 'docker'
     state: '{{ docker_engine_state }}'
-    enabled: 'yes'
+    enabled: '{{ docker_engine_enabled }}'

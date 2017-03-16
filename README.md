@@ -14,6 +14,7 @@ Role Variables
 - `docker_engine_init_system`: OS init system. (default 'upstart')
 - `docker_engine_is_prod`: Is a production environment or not (default: True)
 - `docker_engine_state`: Desired daemon state after role execution (default: 'started')
+- `docker_engine_enabled`: Enable docker at boot or not (default: 'yes')
 - `docker_engine_opts`: To modify the daemon startup options (Ex: '-H tcp://127.0.0.1:2375')
 - `docker_engine_http_proxy`: If you need Docker to use an HTTP proxy (Ex: 'http://127.0.0.1:3128/')
 - `docker_engine_tmpdir`: Docker's temporary files dir (Ex: '/mnt/bigdrive/docker-tmp')
