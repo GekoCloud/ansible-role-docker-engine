@@ -5,8 +5,10 @@
   service:
     name: 'docker'
     state: 'restarted'
+  when: docker_engine_state == 'started'
 
 - name: reload systemctl docker
   shell: >
     systemctl daemon-reload
   notify: restart docker
+  when: docker_engine_state == 'started'
