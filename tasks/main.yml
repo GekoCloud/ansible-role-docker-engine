@@ -33,7 +33,7 @@
     state: 'installed'
   with_items:
     - linux-image-extra-{{ ansible_kernel }}
-  when: docker_engine_is_prod
+  when: docker_engine_is_prod and ansible_distribution_version | version_compare('16.04', '<')
   tags:
     - docker_engine
 
