@@ -6,4 +6,4 @@ docker_engine_supported:
   - wily
   - xenial
 
-docker_engine_package_name: 'docker-engine{% if docker_engine_version is defined %}={{ docker_engine_version }}*{% endif %}'
+docker_engine_package_name: 'docker-ce{% if docker_engine_version is defined %}={{ docker_engine_version }}*{% endif %}'
