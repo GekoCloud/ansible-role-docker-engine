@@ -5,3 +5,4 @@ docker_engine_init_system: 'upstart'
 docker_engine_is_prod: True
 docker_engine_state: 'started'
 docker_engine_enabled: 'yes'
+docker_engine_daemon_config: {}

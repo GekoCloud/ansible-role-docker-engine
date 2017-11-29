@@ -18,6 +18,7 @@ Role Variables
 - `docker_engine_opts`: To modify the daemon startup options (Ex: '-H tcp://127.0.0.1:2375')
 - `docker_engine_http_proxy`: If you need Docker to use an HTTP proxy (Ex: 'http://127.0.0.1:3128/')
 - `docker_engine_tmpdir`: Docker's temporary files dir (Ex: '/mnt/bigdrive/docker-tmp')
+- `docker_engine_daemon_config`: Dict used to set /etc/docker/daemon.json config file (default: empty dict)
 
 Example Playbook
 ----------------
