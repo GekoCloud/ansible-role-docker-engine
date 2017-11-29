@@ -66,6 +66,27 @@
   tags:
     - docker_engine
 
+- name: Create docker config directory
+  file:
+    path: '/etc/docker'
+    state: 'directory'
+    owner: 'root'
+    group: 'root'
+    mode: '0600'
+  tags:
+    - docker_engine
+
+- name: Configure docker daemon.json
+  copy:
+    content: '{{ docker_engine_daemon_config | to_nice_json }}'
+    dest: '/etc/docker/daemon.json'
+    owner: 'root'
+    group: 'root'
+    mode: '0400'
+  notify: restart docker
+  tags:
+    - docker_engine
+
 - name: Prevent docker to start on install
   copy:
     content: |-
@@ -89,15 +110,6 @@
     name: '/usr/sbin/policy-rc.d'
     state: 'absent'
   changed_when: False
-
-- name: Configure docker daemon.json
-  copy:
-    content: '{{ docker_engine_daemon_config | to_nice_json }}'
-    dest: '/etc/docker/daemon.json'
-    owner: 'root'
-    group: 'root'
-    mode: '0400'
-  notify: restart docker
 
 - include: '{{ docker_engine_init_system }}.yml'
   tags:
