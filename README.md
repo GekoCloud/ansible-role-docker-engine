@@ -6,13 +6,12 @@ This role installs and configures [docker-engine](https://www.docker.com/product
 Requirements
 ------------
 
-Only Ubuntu 14.04 (trusty), 15.10 (wily) and 16.04 (xenial) are supported
+Only Ubuntu 16.04 (xenial) and 18.04 (bionic) are supported
 
 Role Variables
 --------------
 
-- `docker_engine_init_system`: OS init system. (default 'upstart')
-- `docker_engine_is_prod`: Is a production environment or not (default: True)
+- `docker_engine_init_system`: OS init system. (default 'systemd')
 - `docker_engine_state`: Desired daemon state after role execution (default: 'started')
 - `docker_engine_enabled`: Enable docker at boot or not (default: 'yes')
 - `docker_engine_opts`: To modify the daemon startup options (Ex: '-H tcp://127.0.0.1:2375')

@@ -27,35 +27,11 @@
   tags:
     - docker_engine
 
-- name: Install required packages for prod environment
-  apt:
-    name: '{{ item }}'
-    state: 'installed'
-  with_items:
-    - linux-image-extra-{{ ansible_kernel }}
-  when: docker_engine_is_prod and ansible_distribution_version | version_compare('16.04', '<')
-  tags:
-    - docker_engine
-
 - name: Add docker apt key
   apt_key:
     url: 'https://download.docker.com/linux/ubuntu/gpg'
     state: present
   when: ansible_distribution_version | version_compare('16.04', '>=')
-  tags:
-    - docker_engine
-
-- block:
-    - name: Install curl
-      apt:
-        name: 'curl'
-        state: 'installed'
-
-    - name: Add docker apt key
-      shell: >
-        curl -sSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
-      changed_when: False
-  when: ansible_distribution_version | version_compare('16.04', '<')
   tags:
     - docker_engine
 

@@ -2,8 +2,7 @@
 # vars file for docker-engine
 
 docker_engine_supported:
-  - trusty
-  - wily
   - xenial
+  - bionic
 
 docker_engine_package_name: 'docker-ce{% if docker_engine_version is defined %}={{ docker_engine_version }}*{% endif %}'

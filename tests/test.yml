@@ -1,14 +1,4 @@
 ---
-- hosts: travis-trusty
-  connection: docker
-  remote_user: root
-  roles:
-    - {
-      role: ansible-role-docker-engine,
-      docker_engine_is_prod: False,
-      docker_engine_opts: '-H tcp://0.0.0.0:2375'
-    }
-
 - hosts: travis-xenial
   connection: docker
   remote_user: root

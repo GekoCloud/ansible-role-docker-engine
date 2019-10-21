@@ -9,9 +9,8 @@ galaxy_info:
   platforms:
   - name: Ubuntu
     versions:
-      - trusty
-      - wily
       - xenial
+      - bionic
 
   galaxy_tags:
     - ubuntu
